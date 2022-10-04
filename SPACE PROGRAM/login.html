@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="code.js"></script>
+
+<head>
+   <title> UAT Space Login </title>
+
+   <!--This aligns all the text to the center of the page-->
+   <style>
+       h1 {text-align: center;}
+       p {text-align: center;}
+       form {text-align: center;}
+       body {background-image: url('spaceline.jpg');
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-size: 100% 100%;
+       }
+   </style>
+
+</head>
+
+<body>
+    
+    <!--I wanted to have ambient background music for login screen but the problem is, when I launch, the sound doesn't play. It only does when you click into the webpage-->
+    <!-- then go back to the code and do CTRL+S. Also, the loop doesn't even work when the music is done...-->
+    <audio src="Ambient.m4a" autoplay>
+        <p> If you are reading this, it is because your browser does not support this audio element!</p>
+        <embed src="Ambient.m4a" width="180" height="90" hidden="true"/>
+    </audio>    
+
+    <h1 style="color:dodgerblue">
+        Welcome to UAT Space, Please Login...
+    </h1>
+    <br>
+    <p id = "loginStatus" classes="texty" style="color:dodgerblue"> Status of Login...</p>
+    <br>
+    <!--This will create the form sheet or page for submitting login information along with colors for the text-->
+    <form id="credSubmit" onsubmit="return false" style="color:dodgerblue">
+    First Name:         <input type="text" id="fName" /> <br>
+    Last Name:          <input type="text" id="lName" /> <br>
+    Badge Number:       <input type="number" id="badgeID" /> <br>
+    <!--This will help us link the code.js so the programming will work!!-->
+    <input type="submit" onclick="checkCreds();" />
+    </form>
+
+</body>
+</html>

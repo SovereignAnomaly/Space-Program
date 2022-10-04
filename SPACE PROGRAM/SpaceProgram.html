@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--Tyler Mitchell, 10/27/2020-->
+<head>
+    <!--This code below brings in the code.js for the HTML program to use when it starts running.-->
+    <script src="code.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAT Space Program</title>
+    <script src="dataLoader-1.js"></script>
+    <!--This is for the style of the background and the border for the table with it's width-->
+    <!--All buttons below have their own colors and attributes!!-->
+    <style>
+        #grad1{
+            height: 900px;
+            background: radial-gradient( white, deepskyblue);
+        }
+        
+        .table2, .th2, td {
+            border: 1px solid black;
+        }
+        .button {
+            color: limegreen;
+            background-color: black;
+            height: 30px;
+        }
+        .button2 {
+            color: red;
+            background-color:black;
+            height: 30px;
+        }
+        
+        .button3 {
+            color:white;
+            background-color: black;
+            width:325px;
+            height:40px;
+        }
+    </style>
+
+    <script>
+        //variables for the DOM
+        var theTime = new Date();
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_iteration = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        //load data from the array
+        var data = getData();
+
+        //function to load and update display
+        function updateDisplay() {
+            theTime = new Date();
+
+            console.log("Display: " + theTime.getHours() + ":" + theTime.getMinutes() + ":" + theTime.getSeconds());
+
+            var timeRead = data[index].time_seconds;
+            if (timeRead >= 10) {
+                document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].seconds, "seconds");
+                document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+                document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longitude", data[index].longitude, " ");
+                document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
+                document.getElementById("data").rows["bmpSensor_Altitude"].innerHTML = dataRow("BMP Sensor Altitude", data[index].bmpSensor_Altitude, " ");
+                document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[index].bmpSensor_pressure, " ");
+                document.getElementById("data").rows["bmpSensor_temp"].innerHTML = dataRow("BMP Sensor Temp", data[index].bmpSensor_temp, " ");
+                document.getElementById("data").rows["Digital_Sensor"].innerHTML = dataRow("Digital Sensor", data[index].Digital_Sensor, " ");
+                document.getElementById("data").rows["cssSensor_Temp"].innerHTML = dataRow("CSS Sensor Temp", data[index].cssSensor_Temp, " ");
+                document.getElementById("data").rows["cssSensor_eCO2"].innerHTML = dataRow("CSS Sensor eCO2", data[index].cssSensor_eCO2, " ");
+                document.getElementById("data").rows["cssSensor_TVOC"].innerHTML = dataRow("CSS Sensor TVOC", data[index].cssSensor_TVOC, " ");
+                document.getElementById("data").rows["UV"].innerHTML = dataRow("UV", data[index].uv, " ");
+                document.getElementById("data").rows["accelX"].innerHTML = dataRow("AccelX", data[index].accelX, " ");
+                document.getElementById("data").rows["accelY"].innerHTML = dataRow("AccelY", data[index].accelY, " ");
+                document.getElementById("data").rows["accelZ"].innerHTML = dataRow("AccelZ", data[index].accelZ, " ");
+                document.getElementById("data").rows["MagneticX"].innerHTML = dataRow("MagneticX", data[index].MagneticX, " ");
+                document.getElementById("data").rows["MagneticY"].innerHTML = dataRow("MagneticY", data[index].MagneticY, " ");
+                document.getElementById("data").rows["MagneticZ"].innerHTML = dataRow("MagneticZ", data[index].MagneticZ, " ");
+                document.getElementById("data").rows["GyroX"].innerHTML = dataRow("GyroX", data[index].GyroX, " ");
+                document.getElementById("data").rows["GyroY"].innerHTML = dataRow("GyroY", data[index].GyroY, " ");
+                document.getElementById("data").rows["GyroZ"].innerHTML = dataRow("GyroZ", data[index].GyroZ, " ");
+
+                if(index < 501) {
+                    index = index + 1;
+                }
+                else {
+                    index = 0;
+                }
+            }
+
+                //current time function
+                document.getElementById("time").innerHTML = theTime.getHours() + ":" + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes()) + ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds());
+        }
+
+
+    </script>
+
+
+</head>
+
+<body id="grad1">
+    <table class="table table">
+        <tr>
+            <th class="th th"> <img src= "UATspaceLogo-2.jpg" alt= "SpaceLogo" </th> <th style="font-size: 143.4px;"> UAT Space Program </th>
+        </tr>
+    </table>
+   
+    <!--This is the code for the table, with each column and row-->
+    <!--Using the style above, I was able to put the Title next to the picture as well as keep the border around the second table and that felt very rewarding figuring that out!!-->
+    <!---->
+    <table style="width:80%" id="data" class="table table2">
+        <thead style="font-size: 25px;">
+            <tr><th class= "th th2">Data Type</th><th class="th th2">Reading</th></tr>
+        </thead>
+        
+        <tr id="seconds"></tr>
+        <tr id="latitude"></tr>
+        <tr id="longitude"></tr>
+        <tr id="gps_altitude"></tr>
+        <tr id="bmpSensor_Altitude"></tr>
+        <tr id="bmpSensor_pressure"></tr>
+        <tr id="bmpSensor_temp"></tr>
+        <tr id="Digital_Sensor"></tr>
+        <tr id="cssSensor_Temp"></tr>
+        <tr id="cssSensor_eCO2"></tr>
+        <tr id="cssSensor_TVOC"></tr>
+        <tr id="UV"></tr>
+        <tr id="accelX"></tr>
+        <tr id="accelY"></tr>
+        <tr id="accelZ"></tr>
+        <tr id="MagneticX"></tr>
+        <tr id="MagneticY"></tr>
+        <tr id="MagneticZ"></tr>
+        <tr id="GyroX"></tr>
+        <tr id="GyroY"></tr>
+        <tr id="GyroZ"></tr>
+    </table>
+    <br>
+    The current time is: <div id="time"></div>
+    <br>
+    <!--I figured out a way to give the buttons background color and text color by using style above and linking the button & button2 in class category-->
+    <button onclick="start();" class="funWithButtons button" id="startButton" style="width:160px"> Start </button>
+    <button onclick="stop();" class="funWithButtons button2" id="stopButton" style="width:160px"> Stop </button>
+    <br>
+    <br>
+    <!--This sets up the button itself and links it to the code.js-->
+    <button class="soundButton button3" onclick="playStation();">Play Space Station Sounds</button>
+
+
+
+
+
+    <scrip>
+        
+    
+        
+    </scrip>
+</body>
+</html>
